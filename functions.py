@@ -5,11 +5,15 @@ import player_class
 
 
 #Opening json files for later use
-with open("/item_data.json", "r") as read_file:
+with open("./json_files/item_data.json", "r") as read_file:
     itemdata = json.load(read_file)
 
-with open("/room_data.json", "r") as read_file:
+with open("./json_files/room_data.json", "r") as read_file:
     roomdata = json.load(read_file)
+
+#Attaching player class to object
+plr = player_class.player()
+
 
 #ITEM FUNCTIONS
 #Adding item to inventory

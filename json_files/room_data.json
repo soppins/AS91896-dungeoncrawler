@@ -1,0 +1,61 @@
+{
+    "vine_room": {
+        "description": {
+            "entry": "dead vines covering next door, core vines too thick to cut, but dry",
+            "exit": "you step through the remaining embers into the next room"
+        },
+        "investigation": {
+            "answers": {
+                "sconce": 0,
+                "torch": 0
+            },
+            "function": "torch"
+        },
+        "items": {
+            "obtain": "itm_torch",
+            "use": "itm_torch"
+        },
+        "locked": "True",
+        "exit": "chest_room"
+    },
+
+    "chest_room": {
+        "hello":"hello" 
+    },
+
+    "library": {
+        "hello":"hello"
+    },
+
+    "well_room": {
+        "hello":"hello"
+    },
+
+    "alchemy_room": {
+        "hello":"hello"
+    },
+
+    "resevoir_pool": {
+        "hello":"hello"
+    },
+
+    "resevoir_bridge": {
+        "hello":"hello"
+    },
+
+    "spikes_room": {
+        "hello":"hello"
+    },
+
+    "pearl_room": {
+        "hello":"hello"
+    },
+
+    "riddle_room": {
+        "hello":"hello"
+    },
+
+    "idol_room": {
+        "hello":"hello"
+    }
+}
