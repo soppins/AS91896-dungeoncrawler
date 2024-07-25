@@ -2,6 +2,7 @@
 import time
 import json
 import player_class
+import random
 
 
 #Opening json files for later use
@@ -19,6 +20,8 @@ plr = player_class.player()
 #Adding item to inventory
 def item_add(item):
     plr.inventory.append(item)
+    print("'" + itemdata[plr.inventory[-1]]["name"] + "' added to inventory.")
+    print("(Description: " + itemdata[plr.inventory[-1]]["description"]["summary"] + ")")
     
 #Removing item from inventory
 
@@ -36,3 +39,4 @@ def item_add(item):
 #SCORING FUNCTIONS
 #
 
+item_add("itm_wtr")

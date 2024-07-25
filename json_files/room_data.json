@@ -1,5 +1,7 @@
 {
     "vine_room": {
+        "name": "Vine door",
+        "map_number": 0,
         "description": {
             "entry": "dead vines covering next door, core vines too thick to cut, but dry",
             "exit": "you step through the remaining embers into the next room"
@@ -16,46 +18,228 @@
             "use": "itm_torch"
         },
         "locked": "True",
-        "exit": "chest_room"
+        "exit": {
+            "1": "chest_room"
+        }
     },
 
     "chest_room": {
-        "hello":"hello" 
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1": ""
+        } 
     },
 
     "library": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "well_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "alchemy_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "resevoir_pool": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "resevoir_bridge": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "spikes_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "pearl_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "riddle_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     },
 
     "idol_room": {
-        "hello":"hello"
+        "map_number": 0,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":""
+        } 
     }
 }

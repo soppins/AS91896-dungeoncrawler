@@ -1,0 +1,36 @@
+{
+    "itm_wtr": {
+        "name": "Holy Water",
+        "description": {
+            "summary": "Effective against the undead.",
+            "detailed": "Water from the Lake of Gela stored in a glass bottle. This water is said to expel evil from undead creatures."
+        },
+        "use_text": "You splash some Holy Water into the face of the skeleton.",
+        "uses": 0,
+        "damage": 100       
+    },
+    "itm_r_bk": {
+        "name": "Book of Riddles",  
+        "description": {
+            "summary": "Full of riddles and their answers.",
+            "detailed": "A book filled with a range of riddles and their answers. Useful for sucking the fun out of puzzles."
+            },
+        "use_text": "You ."
+        },
+
+    "itm_hp": {
+        "name": "Health Potion", 
+        "description": {
+            "summary": "Heals wounds.",
+            "detailed": "A healing elixr brewed by the Ancient Alchemists. It warms your hand through the glass bottle."
+            }
+        },
+
+    "itm_key": {
+        "name": "Skeleton Key",  
+        "description": {
+            "summary": "Can open any key-operated lock.",
+            "detailed": "A key with a skull engraved into its head that is able to open any lock. It's a family heirloom of yours."
+            }
+        }
+}
