@@ -15,7 +15,7 @@
             "summary": "Full of riddles and their answers.",
             "detailed": "A book filled with a range of riddles and their answers. Useful for sucking the fun out of puzzles."
             },
-        "use_text": "You ."
+        "use_text": "You search the index of the book for the PLACEHOLDER's riddle and find answer."
         },
 
     "itm_hp": {
@@ -23,14 +23,26 @@
         "description": {
             "summary": "Heals wounds.",
             "detailed": "A healing elixr brewed by the Ancient Alchemists. It warms your hand through the glass bottle."
-            }
+            },
+        "use_text": "You down the contents of the bottle."
         },
 
     "itm_key": {
         "name": "Skeleton Key",  
         "description": {
             "summary": "Can open any key-operated lock.",
-            "detailed": "A key with a skull engraved into its head that is able to open any lock. It's a family heirloom of yours."
-            }
-        }
+            "detailed": "A magical key with a skull engraved into its head that is able to open any lock. You found it in an abandoned temple."
+            },
+        "use_text": "You slide the key into the lock. As you turn it, you feel a biting pain on your thumb.\nThe chest unlocks.\nStaring at the skull engraved on the Skeleton Key's head, you notice its teeth are now bloodied.",
+        "damage": 5
+        },
+    
+    "itm_prl": {
+        "name": "Gela Pearl",
+        "description": {
+            "summary": ".",
+            "detailed": "A pearl formed in a colossal clam at the bottom of the Lake of Gela. It retains a fragment of the lake's power."
+        },
+        "use_text": "You splash some Holy Water into the face of the skeleton."
+
 }

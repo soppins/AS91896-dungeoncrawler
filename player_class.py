@@ -1,8 +1,9 @@
 class player():
     #Player's starting stats and items. Name defined by 'name_player()' function
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
+        self.name = "Gertibald"
         self.hp = 100
+        self.damage = 23
         self.inventory = ["itm_key", "itm_sword"]
         
     #Adding hp to player
@@ -23,13 +24,15 @@ class player():
     def reset_hp(self):
         self.hp = 100
 
-    #Attacking
+    #Attacking enemy
     def attack(self, target):
+        target.hp -= self.damage
 
 class enemy():
     #Enemies' starting health will be determined by the 'spawn_enemy()' function
     def __init__(self, health):
         self.hp = health
+        self.hp = 17
     
     #Removing hp from enemy
     def rem_hp(self, amount):
@@ -37,3 +40,7 @@ class enemy():
         #Defining a minimum health level
         if self.hp < 0:
             self.hp = 0
+            
+    #Attacking player
+    def attack(self, target):
+        target.hp -= self.damage
