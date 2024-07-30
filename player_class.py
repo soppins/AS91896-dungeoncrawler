@@ -4,7 +4,7 @@ class player():
         self.name = "Gertibald"
         self.hp = 100
         self.damage = 23
-        self.inventory = ["itm_key", "itm_swrd"]
+        self.inventory = ["itm_key", "itm_swrd", "itm_wtr", "itm_btl", "itm_pbl"]
         
     #Adding hp to player
     def add_hp(self, amount):

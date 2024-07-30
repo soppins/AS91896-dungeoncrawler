@@ -25,6 +25,7 @@ def create_player():
     else:
         create_player()
 
+
 #ITEM FUNCTIONS
 #Adding item to inventory
 def item_add(item):
@@ -42,26 +43,89 @@ def item_used(item):
     itemdata[item]["uses"]["summary"]
     
 #Displaying items in player inventory
+def inventory_list():
+    #First number of the list of items
+    number = 1
+    #Iterating over items present
+    for item in plr.inventory:
+        #
+        name = itemdata[item]["name"]
+        uses = itemdata[item]["uses"]
+        #Don't print the item if it has no uses left
+        if uses == 0:
+            pass
+        #Print the item with uses if it has uses
+        elif uses != "None":
+            print("{}> {} ({})".format(number, name, uses))
+            number += 1
+        #If no uses, just print the item name
+        else:
+            print("{}> {}".format(number, name))
+            number += 1
 
 
 #FIGHTING FUNCTIONS
 #
 
 
+
 #ROOM FUNCTIONS
-#
+#Printing map with the player displayed in the room they're currently in
+def map_position(room_num):
+    s = """────────┐                                                                             
+        └┐                                                                            
+──────┐  └┐                                                                           
+      └┐  └┐                                                                          
+       └┐  └┐                                ┌──────┐                                 
+        └┐  └┐                             ┌╥┘ ╤══╤ └┐    ┌──┐                        
+         └┐  └──╥─────╥─────╥──────────────┘║ ╚╪═╦╪╝ │    │░•│                        
+          └┐ .  ╢  .  ╢  .  ╢       .       ╢ ┌┴──┴┐ │  ┌─┘░ └─┐                      
+           └────╨─────╨─────╨───────────────╨─┴────┴─┘  │░░  •░│                      
+             │┼│                            ┌────────┐  │░•  ░░│                      
+             │┼│ ┌▼▼▼▼┐ ┌──────┐ ┌──┐ ┌──┐ ┌┘ ~     ~└┐ │░  • ░│                      
+             │┼└╥┘░  ░└╥┘░     └╥┘  └╥┘  └╥┘  ~     ~ └─┘     ░│                      
+             │┼ ╢ ░ .  ╢   .  ░░╢ .  ╢  . ╢   ~     ~      ┬┬  │                      
+             └┴─╨──────╨─┐▲▲▲▲┌──────────────────────────╥─┴┴─╥┘                      
+                                             ┌──────┐                                 
+                                           ┌─┘~     └─┐                               
+                                          ┌┘~ ~     ~ └┐                              
+                                          │ ~ ~     ~  │                              
+                                          │~~~~~~~~~~~~│                              
+                                          └────────────┘                              """
+    sub = "."
+    repl = "@"
+    
+    find = s.find(sub)
+    # If find is not -1 we have found at least one match for the substring
+    i = find != -1
+    # loop util we find the nth or we find no match
+    while find != -1 and i != room_num:
+        # find + 1 means we start searching from after the last match
+        find = s.find(sub, find + 1)
+        i += 1
+    # If i is equal to the room_num we found the match so replace
+    if i == room_num:
+        return s[:find] + repl + s[find+len(sub):]
+    return s
+
 
 
 #INVESTIGATION FUNCTIONS
 #
 
 
+
 #SCORING FUNCTIONS
 #
 
 
-item_add("itm_wtr")
-print(plr.inventory)
-create_player()
-print(plr.name)
-item_rmv("itm_key")
+
+# item_add("itm_wtr")
+# print(plr.inventory)
+# create_player()
+# print(plr.name)
+# item_rmv("itm_key")
+
+print(itemdata["itm_wtr"]["uses"])
+itemdata["itm_wtr"]["uses"] = 20
+print(itemdata["itm_wtr"]["uses"])

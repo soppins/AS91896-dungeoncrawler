@@ -19,78 +19,11 @@
         },
         "locked": "True",
         "exit": {
-            "1": "chest_room"
+            "1": "alchemy_room"
         }
     },
-
-    "chest_room": {
-        "map_number": 0,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "",
-            "use": ""
-        },
-        "locked": "True",
-        "exit": {
-            "1": ""
-        } 
-    },
-
-    "library": {
-        "map_number": 0,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "",
-            "use": ""
-        },
-        "locked": "True",
-        "exit": {
-            "1":""
-        } 
-    },
-
-    "well_room": {
-        "map_number": 0,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "",
-            "use": ""
-        },
-        "locked": "True",
-        "exit": {
-            "1":""
-        } 
-    },
-
     "alchemy_room": {
-        "map_number": 0,
+        "map_number": 1,
         "description": {
             "entry": "",
             "exit": ""
@@ -107,12 +40,11 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"chest_room"
         } 
     },
-
-    "resevoir_pool": {
-        "map_number": 0,
+    "chest_room": {
+        "map_number": 2,
         "description": {
             "entry": "",
             "exit": ""
@@ -129,12 +61,12 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1": "well_room",
+            "2": "library_room"
         } 
     },
-
-    "resevoir_bridge": {
-        "map_number": 0,
+    "well_room": {
+        "map_number": 3,
         "description": {
             "entry": "",
             "exit": ""
@@ -151,12 +83,95 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"reservoir_pool_room"
         } 
     },
-
+    "library_room": {
+        "map_number": 4,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":"reservoir_bridge_room"
+        } 
+    },
+    "reservoir_bridge_room": {
+        "map_number": 5,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":"clam_room"
+        } 
+    },
+    "reservoir_pool_room": {
+        "map_number": 6,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":"clam_room"
+        } 
+    },
+    "clam_room": {
+        "map_number": 7,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": ""
+        },
+        "locked": "True",
+        "exit": {
+            "1":"spikes_room"
+        } 
+    },
     "spikes_room": {
-        "map_number": 0,
+        "map_number": 8,
         "description": {
             "entry": "",
             "exit": ""
@@ -173,12 +188,11 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"button_room"
         } 
     },
-
-    "pearl_room": {
-        "map_number": 0,
+    "button_room": {
+        "map_number": 9,
         "description": {
             "entry": "",
             "exit": ""
@@ -195,12 +209,11 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"riddle_room"
         } 
     },
-
     "riddle_room": {
-        "map_number": 0,
+        "map_number": 10,
         "description": {
             "entry": "",
             "exit": ""
@@ -217,12 +230,11 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"idol_room"
         } 
     },
-
     "idol_room": {
-        "map_number": 0,
+        "map_number": 11,
         "description": {
             "entry": "",
             "exit": ""

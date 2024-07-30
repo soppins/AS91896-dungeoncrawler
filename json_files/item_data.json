@@ -5,8 +5,8 @@
             "summary": "Effective against the undead.",
             "detailed": "Water from the Lake of Gela stored in a glass bottle. This water is said to expel evil from undead creatures."
         },
-        "use_text": "You splash some Holy Water into the face of the skeleton.",
         "uses": 0,
+        "use_text": "You splash some Holy Water into the face of the skeleton.\nA low sigh leaves its mouth as it crumples, and lifeless bones clatter to the ground.",
         "damage": 100       
     },
     "itm_r_bk": {
@@ -15,7 +15,8 @@
             "summary": "Full of riddles and their answers.",
             "detailed": "A book filled with a range of riddles and their answers. Useful for sucking the fun out of puzzles."
             },
-        "use_text": "You search the index of the book for the PLACEHOLDER's riddle and find the answer."
+        "uses": "None",
+        "use_text": "You search the index of the book for the PLACEHOLDER's riddle and find the answer.\n'Nothing.'"
         },
 
     "itm_t_bk": {
@@ -24,7 +25,8 @@
             "summary": "Details common traps and how to spot them.",
             "detailed": "A book filled with detailed blueprints of common traps and how to spot and defuse them. Useful for avoiding nasty surprises."
             },
-        "use_text": "You consult the “Spotting traps” chapter.\nAfter observing every inch of the room, you notice something suspicious."
+        "uses": "None",
+        "use_text": "You consult the 'Spotting traps' chapter.\nAfter observing every inch of the room, you notice something suspicious."
         },
 
     "itm_c_bk": {
@@ -33,7 +35,8 @@
             "summary": "Promises great power within.",
             "detailed": "A dusty tome authored by the Ancient Edoc Imanok. The book seems to have been saved from a fire long ago."
             },
-        "use_text": "You flip through the scorched pages until you come upon a single readable passage: 'Once in a state of observation, focus your mind on these runes: ^^vv<><>.'"
+        "uses": 0,
+        "use_text": "You flip through the book's scorched pages until you come upon a single readable passage: 'Once in a state of observation, focus your mind on these runes: '^^vv<><>.'"
         },
 
     "itm_hp": {
@@ -52,7 +55,8 @@
             "summary": "Can open any key-operated lock.",
             "detailed": "A magical key with a skull engraved into its head that is able to open any lock. You found it in an abandoned temple."
             },
-        "use_text": "You slide the key into the lock. As you turn it, you feel a biting pain on your thumb.\nStaring at the skull engraved on the Skeleton Key's head, you notice its teeth are now bloodied.\nThe chest unlocks.",
+        "uses": "None",
+        "use_text": "You slide the key into the lock. As you turn it, you feel a biting pain on your thumb, and yank your hand away.\nStaring at the skull engraved on the Skeleton Key's head, you notice its teeth are now bloodied.\nThe chest unlocks.",
         "damage": 5
         },
     
@@ -62,7 +66,7 @@
             "summary": "Lightly glowing.",
             "detailed": "A pearl formed by a colossal clam at the bottom of the Lake of Gela. It retains a fragment of the lake's spirit."
         },
-        "use_text": "You place the pearl in the small divot on the side of the plinth.\nA low rumbling reminiscent of the sound of crashing waves sounds in the distance, and the clamshell opens to reveal a pile of treasure.",
+        "use_text": "You place the pearl in the small divot on the side of the plinth.\nA low rumbling reminiscent of the sound of crashing waves sounds in the distance, and the clamshell opens.\nSitting inside it is a pile of treasure.",
         "uses": 0
         },
 
@@ -72,6 +76,7 @@
             "summary": "Is it possible to disembowel a skeleton?",
             "detailed": "A steel shortsword that, though dulled, is still sufficient to defend yourself with."
         },
+        "uses": "None",
         "use_text": "Your sword swings and sticks into the side of the skeleton. A raspy shriek escapes its skull as you rip the sword back out, taking a rib with it.",
         "damage": 23
         },
@@ -82,6 +87,7 @@
             "summary": "Magic paper.",
             "detailed": "A map of the dungeon. A simple enchantment upon it shows you your current location. You stole it from your now-former employer."
         },
+        "uses": "None",
         "use_text": "You unfurl the map."      
         },
 
@@ -89,9 +95,10 @@
         "name": "Torch",
         "description": {
             "summary": "Able to burn dry material.",
-            "detailed": "A flaming torch that can be used to burn away dry material. Such as vines. Hint hint."
+            "detailed": "A flaming torch that can be used to burn away dry material (such as vines (hint hint))."
         },
-        "use_text": "You bring the torch close to the thinner of the vines.\nThe tips of the flames lick their shrivelled leaves, setting the whole mass of tendrils aflame.\nThe room is momentarily filled with an intense warmth, but it eventually dies away, being replaced by the cold of the stone walls of the dungeon.\nThe way forward is no longer obstructed."      
+        "uses": "None",
+        "use_text": "You bring the torch close to the thinner of the vines.\nThe tips of the flames lick their shrivelled leaves, setting the whole mass of tendrils aflame.\nAn intense warmth momentarily fills the room, but as the flaming vines crumble away, it is once again replaced by the cold of the stone walls of the dungeon.\nYour way forward is no longer obstructed."      
         },
 
     "itm_btl": {
@@ -101,25 +108,26 @@
             "detailed": "An empty glass bottle with a cork. Could be used to hold something."
         },
         "use_text": "You uncork the bottle gently and submerge it in the water, allowing it to fill completely.\nAs you reinsert the cork, you notice the almost pearlescent quality of the water against the light of the bioluminescent bulbs above.",
-        "uses": 0    
+        "uses": 4    
         },
 
     "itm_pbl": {
         "name": "Pebbles",
         "description": {
             "summary": "Harmless.",
-            "detailed": "Small, round stones. They've most likely made their way into the dungeon from the Lake of Gela through the subterranean rivers that feed the resevoir."
+            "detailed": "Small, round stones. They've most likely made their way into the dungeon from the Lake of Gela through the subterranean rivers that feed the reservoir."
         },
         "use_text": "You take a pebble from your collection and rub it between your fingers.\nIts cool, smooth surface calms you.",
         "uses": 0
         },
 
     "itm_invs": {
-        "name": "Invisibility Potion",
+        "name": "Mysterious Potion",
         "description": {
-            "summary": "Avoid enemy encounters with this one simple trick!",
-            "detailed": "This unique ancient elixir bestows upon the drinker the power of invisibility. Useful for bad fighters."
+            "summary": "It draws you in...",
+            "detailed": "This unique ancient elixir bestows upon the drinker a power that is useful for bad fighters."
         },
-        "use_text": "."      
+        "uses": 0,
+        "use_text": "After you swallow the last of the potion, your skin begins to tingle.\nFlames spring from the tips of your fingertips. They crawl up your arms and across your skin until they envelop you entirely, but they don't burn.\nOnce the flames dissipate, you realise you can no longer see your arms or legs.\nYou are now invisible."      
         }
 }
