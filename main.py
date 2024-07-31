@@ -14,5 +14,4 @@ with open("./json_files/item_data.json", "r") as read_file:
 with open("./json_files/room_data.json", "r") as read_file:
     roomdata = json.load(read_file)
 
-fun.inventory_list()
-    
+

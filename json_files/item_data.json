@@ -115,7 +115,7 @@
         "name": "Pebbles",
         "description": {
             "summary": "Harmless.",
-            "detailed": "Small, round stones. They've most likely made their way into the dungeon from the Lake of Gela through the subterranean rivers that feed the reservoir."
+            "detailed": "Small, round stones. They've most likely made their way into the dungeon through the subterranean rivers that feed the reservoir.\nThese rivers flow from the Lake of Gela, a sacred body of water bordered by hostile rocks that prevent any entry to it aboveground.\nFor this reason, this underground reservoir was constructed, with easy access to it via a\nwell, as the lake's water was coveted by alchemists for the power it holds."
         },
         "use_text": "You take a pebble from your collection and rub it between your fingers.\nIts cool, smooth surface calms you.",
         "uses": 0

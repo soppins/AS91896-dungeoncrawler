@@ -4,6 +4,8 @@ import json
 import player_class
 import random
 
+current_room = "vines_room"
+
 
 #Opening json files for later use
 with open("./json_files/item_data.json", "r") as read_file:
@@ -24,6 +26,11 @@ def create_player():
         plr.name = name
     else:
         create_player()
+
+#Displaying player healthbar
+def player_healthbar():
+    #ADD COLOUR!!!!!!!!!!!!!!!!!!!!!!!!!!!! AND ACTUAL CODE
+    print("[IIIIIIII______]")
 
 
 #ITEM FUNCTIONS
@@ -65,8 +72,19 @@ def inventory_list():
 
 
 #FIGHTING FUNCTIONS
-#
+#Enter fighting 
+def fight_state():
+    print("fight state")
 
+#Rollin' the fightin' dice
+def enter_fight():
+    if random.randint(0, 100) <= roomdata[current_room]["fightprob"]:
+        spawn_enemy()
+        fight_state()
+        
+#Spawn enemy
+def spawn_enemy():
+    print("enemy")
 
 
 #ROOM FUNCTIONS
@@ -111,21 +129,11 @@ def map_position(room_num):
 
 
 #INVESTIGATION FUNCTIONS
-#
-
+#Investigation state
+def invst_state():
+    print("investigate")
 
 
 #SCORING FUNCTIONS
 #
 
-
-
-# item_add("itm_wtr")
-# print(plr.inventory)
-# create_player()
-# print(plr.name)
-# item_rmv("itm_key")
-
-print(itemdata["itm_wtr"]["uses"])
-itemdata["itm_wtr"]["uses"] = 20
-print(itemdata["itm_wtr"]["uses"])
