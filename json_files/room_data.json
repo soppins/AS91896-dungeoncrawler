@@ -1,7 +1,6 @@
 {
     "vine_room": {
-        "name": "Vine door",
-        "map_number": 0,
+        "map_number": 1,
         "description": {
             "entry": "dead vines covering next door, core vines too thick to cut, but dry",
             "exit": "you step through the remaining embers into the next room"
@@ -23,27 +22,6 @@
         }
     },
     "alchemy_room": {
-        "map_number": 1,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "",
-            "use": ""
-        },
-        "locked": "True",
-        "exit": {
-            "1":"chest_room"
-        } 
-    },
-    "chest_room": {
         "map_number": 2,
         "description": {
             "entry": "",
@@ -56,16 +34,15 @@
             "function": ""
         },
         "items": {
-            "obtain": "",
+            "obtain": "itm_btl",
             "use": ""
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
-            "1": "well_room",
-            "2": "library_room"
+            "1":"chest_room"
         } 
     },
-    "well_room": {
+    "chest_room": {
         "map_number": 3,
         "description": {
             "entry": "",
@@ -73,20 +50,22 @@
         },
         "investigation": {
             "answers": {
-                "": 0
+                "trapdoor": 0,
+                "hatch": 0
             },
-            "function": ""
+            "function": "trapdoor_label"
         },
         "items": {
             "obtain": "",
-            "use": ""
+            "use": "itm_key"
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
-            "1":"reservoir_pool_room"
+            "1": "well_room",
+            "2": "library_room"
         } 
     },
-    "library_room": {
+    "well_room": {
         "map_number": 4,
         "description": {
             "entry": "",
@@ -102,12 +81,12 @@
             "obtain": "",
             "use": ""
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
-            "1":"reservoir_bridge_room"
+            "1":"reservoir_pool_room"
         } 
     },
-    "reservoir_bridge_room": {
+    "library_room": {
         "map_number": 5,
         "description": {
             "entry": "",
@@ -115,20 +94,23 @@
         },
         "investigation": {
             "answers": {
-                "": 0
+                "bookshelf": 0,
+                "bookshelves": 0,
+                "bookcase": 0,
+                "books": 0
             },
-            "function": ""
+            "function": "bookshelf"
         },
         "items": {
-            "obtain": "",
+            "obtain": "itm_r_bk",
             "use": ""
         },
         "locked": "True",
         "exit": {
-            "1":"clam_room"
+            "1":"reservoir_bridge_room"
         } 
     },
-    "reservoir_pool_room": {
+    "reservoir_bridge_room": {
         "map_number": 6,
         "description": {
             "entry": "",
@@ -144,12 +126,12 @@
             "obtain": "",
             "use": ""
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"clam_room"
         } 
     },
-    "clam_room": {
+    "reservoir_pool_room": {
         "map_number": 7,
         "description": {
             "entry": "",
@@ -157,20 +139,22 @@
         },
         "investigation": {
             "answers": {
-                "": 0
+                "water": 0,
+                "pool": 0,
+                "reservoir": 0
             },
-            "function": ""
+            "function": "pearl"
         },
         "items": {
-            "obtain": "",
-            "use": ""
+            "obtain": "itm_prl",
+            "use": "itm_btl"
         },
         "locked": "True",
         "exit": {
-            "1":"spikes_room"
+            "1":"clam_room"
         } 
     },
-    "spikes_room": {
+    "clam_room": {
         "map_number": 8,
         "description": {
             "entry": "",
@@ -184,14 +168,14 @@
         },
         "items": {
             "obtain": "",
-            "use": ""
+            "use": "itm_prl"
         },
         "locked": "True",
         "exit": {
-            "1":"button_room"
+            "1":"spikes_room"
         } 
     },
-    "button_room": {
+    "spikes_room": {
         "map_number": 9,
         "description": {
             "entry": "",
@@ -205,11 +189,11 @@
         },
         "items": {
             "obtain": "",
-            "use": ""
+            "use": "itm_t_bk"
         },
         "locked": "True",
         "exit": {
-            "1":"riddle_room"
+            "1":"button_room"
         } 
     },
     "riddle_room": {
@@ -226,7 +210,7 @@
         },
         "items": {
             "obtain": "",
-            "use": ""
+            "use": "itm_r_bk"
         },
         "locked": "True",
         "exit": {
@@ -243,10 +227,10 @@
             "answers": {
                 "": 0
             },
-            "function": ""
+            "function": "idol"
         },
         "items": {
-            "obtain": "",
+            "obtain": "itm_idol",
             "use": ""
         },
         "locked": "True",

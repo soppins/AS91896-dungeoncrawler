@@ -3,9 +3,7 @@ import time
 import json
 import player_class
 import random
-
-current_room = "vines_room"
-
+import events
 
 #Opening json files for later use
 with open("./json_files/item_data.json", "r") as read_file:
@@ -16,6 +14,14 @@ with open("./json_files/room_data.json", "r") as read_file:
 
 #Attaching player class to object
 plr = player_class.player()
+
+#Attaching event functions to evt. prefix
+evt = events
+
+#SETTING CURRENT ROOM FOR TESTING:
+current_room = "library_room"
+
+
 
 #PLAYER
 #Creating player object with a name
@@ -29,8 +35,9 @@ def create_player():
 
 #Displaying player healthbar
 def player_healthbar():
-    #ADD COLOUR!!!!!!!!!!!!!!!!!!!!!!!!!!!! AND ACTUAL CODE
+    #ADD COLOUR!!!!!!!!!!!!!!!!!!!!!!!!!!!! AND ACTUAL CODE to make it related ro player health
     print("[IIIIIIII______]")
+    print(f"{plr.hp}/100")
 
 
 #ITEM FUNCTIONS
@@ -45,9 +52,14 @@ def item_rmv(item):
     plr.inventory.remove(item)
     print("'" + itemdata[item]["name"] + "' lost with use.")
 
-#Lowering an item's number of uses with use of the item
+#Checks if a specified item is already in the player's inventory
+def item_in_inventory(item):
+    return True if item in plr.inventory else False
+
+#Lowering an item's number of uses with use of the item (no need to check whether an item has uses remaining or not, as the user won't be able to see items with 0 uses in inventory)
 def item_used(item):
-    itemdata[item]["uses"]["summary"]
+    itemdata[item]["uses"]["summary"] -= 1
+        
     
 #Displaying items in player inventory
 def inventory_list():
@@ -55,7 +67,7 @@ def inventory_list():
     number = 1
     #Iterating over items present
     for item in plr.inventory:
-        #
+        #Defining official name and number of uses of current item
         name = itemdata[item]["name"]
         uses = itemdata[item]["uses"]
         #Don't print the item if it has no uses left
@@ -76,11 +88,13 @@ def inventory_list():
 def fight_state():
     print("fight state")
 
-#Rollin' the fightin' dice
+#Deciding whether to spawn enemy
 def enter_fight():
-    if random.randint(0, 100) <= roomdata[current_room]["fightprob"]:
+    if random.randint(0, 100) <= roomdata[current_room]["fight_prob"]:
         spawn_enemy()
         fight_state()
+    else:
+        pass
         
 #Spawn enemy
 def spawn_enemy():
@@ -89,8 +103,9 @@ def spawn_enemy():
 
 #ROOM FUNCTIONS
 #Printing map with the player displayed in the room they're currently in
-def map_position(room_num):
-    s = """────────┐                                                                             
+def map_position():
+    s = """PLACEHOLDER MAP-THIS WAS A TEST OF MAKING AN ASCII ART MAP, BUT DOES NOT REPRESENT THE FINAL LAYOUT OF THE DUNGEON
+────────┐                                                                             
         └┐                                                                            
 ──────┐  └┐                                                                           
       └┐  └┐                                                                          
@@ -110,6 +125,7 @@ def map_position(room_num):
                                           │ ~ ~     ~  │                              
                                           │~~~~~~~~~~~~│                              
                                           └────────────┘                              """
+    map_num = roomdata[current_room]["map_number"]
     sub = "."
     repl = "@"
     
@@ -117,21 +133,43 @@ def map_position(room_num):
     # If find is not -1 we have found at least one match for the substring
     i = find != -1
     # loop util we find the nth or we find no match
-    while find != -1 and i != room_num:
+    while find != -1 and i != map_num:
         # find + 1 means we start searching from after the last match
         find = s.find(sub, find + 1)
         i += 1
     # If i is equal to the room_num we found the match so replace
-    if i == room_num:
+    if i == map_num:
         return s[:find] + repl + s[find+len(sub):]
     return s
 
+#Unlocking current room exit door
+def unlock_exit():
+    roomdata[current_room]["locked"] = False
 
 
 #INVESTIGATION FUNCTIONS
-#Investigation state
-def invst_state():
-    print("investigate")
+# 
+def invst_selection(room, investigating):
+    if investigating in roomdata[room]["investigation"]["answers"]:
+        return roomdata[room]["investigation"]["function"]
+    else:
+        return None
+
+#Function will run a specific investigation on an item if the player is in the right room
+def invst_input():
+    investigating = input("What do you investigate?\n[Enter 'books' or 'bookshelf' to initiate test, enter 'done' to stop investigating.]\n").lower()
+    
+    if investigating == "done":
+        return
+    
+    #If the player's focus is one of the correct inputs for the room they're currently in,
+    focus = invst_selection(current_room, investigating)
+    #then run the function for that focus.
+    if focus != None:
+        evt.invst_event(focus)   
+    else:
+        print("You find nothing.")
+        invst_input()
 
 
 #SCORING FUNCTIONS
