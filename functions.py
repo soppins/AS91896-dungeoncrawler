@@ -1,9 +1,8 @@
 #Importing libraries
 import time
 import json
-import player_class
+import player_class as plr
 import random
-import events
 
 #Opening json files for later use
 with open("./json_files/item_data.json", "r") as read_file:
@@ -13,10 +12,7 @@ with open("./json_files/room_data.json", "r") as read_file:
     roomdata = json.load(read_file)
 
 #Attaching player class to object
-plr = player_class.player()
-
-#Attaching event functions to evt. prefix
-evt = events
+plr = plr.player()
 
 #SETTING CURRENT ROOM FOR TESTING:
 current_room = "library_room"
@@ -148,6 +144,8 @@ def unlock_exit():
 
 
 #INVESTIGATION FUNCTIONS
+import events as evt
+
 # 
 def invst_selection(room, investigating):
     if investigating in roomdata[room]["investigation"]["answers"]:
@@ -166,7 +164,11 @@ def invst_input():
     focus = invst_selection(current_room, investigating)
     #then run the function for that focus.
     if focus != None:
-        evt.invst_event(focus)   
+        if evt.invst_event(focus) == "run":
+            invst_input()
+        else:
+            pass
+            
     else:
         print("You find nothing.")
         invst_input()
