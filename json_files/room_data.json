@@ -1,6 +1,7 @@
 {
     "vine_room": {
         "map_number": 1,
+        "fight_prob": 0,
         "description": {
             "entry": "dead vines covering next door, core vines too thick to cut, but dry",
             "exit": "you step through the remaining embers into the next room"
@@ -23,6 +24,7 @@
     },
     "alchemy_room": {
         "map_number": 2,
+        "fight_prob": 50,
         "description": {
             "entry": "",
             "exit": ""
@@ -44,6 +46,7 @@
     },
     "chest_room": {
         "map_number": 3,
+        "fight_prob": 100,
         "description": {
             "entry": "",
             "exit": ""
@@ -67,6 +70,7 @@
     },
     "well_room": {
         "map_number": 4,
+        "fight_prob": 30,
         "description": {
             "entry": "",
             "exit": ""
@@ -88,6 +92,7 @@
     },
     "library_room": {
         "map_number": 5,
+        "fight_prob": 60,
         "description": {
             "entry": "",
             "exit": ""
@@ -107,11 +112,34 @@
         },
         "locked": "True",
         "exit": {
+            "1":"riddle_room"
+        } 
+    },
+    "riddle_room": {
+        "map_number": 6,
+        "fight_prob": 10,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "",
+            "use": "itm_r_bk"
+        },
+        "locked": "True",
+        "exit": {
             "1":"reservoir_bridge_room"
         } 
     },
     "reservoir_bridge_room": {
-        "map_number": 6,
+        "map_number": 7,
+        "fight_prob": 100,
         "description": {
             "entry": "",
             "exit": ""
@@ -132,7 +160,8 @@
         } 
     },
     "reservoir_pool_room": {
-        "map_number": 7,
+        "map_number": 8,
+        "fight_prob": 0,
         "description": {
             "entry": "",
             "exit": ""
@@ -155,7 +184,8 @@
         } 
     },
     "clam_room": {
-        "map_number": 8,
+        "map_number": 9,
+        "fight_prob": 45,
         "description": {
             "entry": "",
             "exit": ""
@@ -176,7 +206,8 @@
         } 
     },
     "spikes_room": {
-        "map_number": 9,
+        "map_number": 10,
+        "fight_prob": 20,
         "description": {
             "entry": "",
             "exit": ""
@@ -193,32 +224,12 @@
         },
         "locked": "True",
         "exit": {
-            "1":"button_room"
-        } 
-    },
-    "riddle_room": {
-        "map_number": 10,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "",
-            "use": "itm_r_bk"
-        },
-        "locked": "True",
-        "exit": {
             "1":"idol_room"
         } 
     },
     "idol_room": {
         "map_number": 11,
+        "fight_prob": 0,
         "description": {
             "entry": "",
             "exit": ""
@@ -235,7 +246,7 @@
         },
         "locked": "True",
         "exit": {
-            "1":""
+            "1":"end_room"
         } 
     }
 }
