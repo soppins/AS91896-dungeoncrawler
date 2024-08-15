@@ -17,7 +17,7 @@ plr = classes.player()
 enmy = classes.enemy()
 
 #SETTING CURRENT ROOM FOR TESTING:
-current_room = "library_room"
+current_room = "vine_room"
 
 
 #PROGRAM FUNCTIONS
@@ -30,10 +30,12 @@ def main_menu():
         game_start()
     elif choice == "config":
         print("no settings :-)\n")
+        time.sleep(.5)
         main_menu()
     elif choice == "close":
-        confirm = input("Are you sure you want to close the program? (y/n)\n")
-        if confirm == "y":
+        print("Are you sure you want to close the program?")
+        confirm = yes_no()
+        if confirm == True:
             game_end()
         else:
             main_menu()
@@ -43,21 +45,34 @@ def main_menu():
 
 #Starts the game (accessible on death or when investigating a room.)
 def game_start():
-    print("hi")
+    print("game startng")
+    plr.name = naming_player()
+    room_movement()
 
 #Closes the game (accessible on death or when investigating a room.)
 def game_end():
     print("bye")
     
-
+#Presents a y/n option that can be recalled if the user inputs the wrong thing
+def yes_no():
+    choice = input("\n[y/n]\n").lower()
+    if choice == "y":
+        return True
+    elif choice == "n":
+        return False
+    else:
+        yes_no()
 
 #PLAYER
 #Naming player object
 def naming_player():
     username = input("What will you name your character? \n")
-    confirm = input(f"You have chosen the name {username}. Proceed? (y/n) \n").lower()
-    if confirm == "y":
-        return username
+    print(f"You have chosen the name {username}. Proceed?")
+    choice = yes_no()
+    if choice == True:
+        print(username)
+    elif choice == False:
+        choice = yes_no()
         
     else:
         naming_player()
@@ -135,6 +150,17 @@ def inventory_list():
 def inventory():
     inventory_list()
     item_choice = input("What would you like to inspect?")
+    print(itemdata[item_choice]["description"]["detailed"])
+    print("Would you like to use this item?")
+    usechoice = yes_no()
+    if usechoice == True:
+        print(itemdata[item_choice]["use_text"])
+
+#When player uses an item, this function decides what occurs based on the current_room's data and the item's data.
+#Each room can only have one successful focus, so this is effectively determining the event by the room the player is in.
+def invst_event():
+    
+    
 
 
 #FIGHTING FUNCTIONS
@@ -150,11 +176,13 @@ def fight_state():
     while fighting == True:
         clear_terminal()
         input("type 'hit' to hit\n")
-        plr.attack(enmy)
-        continue_confirm()
+        
+        enmy.attack(plr)
         print(enmy.hp)
         print(plr.hp)
-        enmy.attack(plr)
+        continue_confirm()
+        
+        plr.attack(enmy)
         print(enmy.hp)
         print(plr.hp)
         continue_confirm()
@@ -164,10 +192,10 @@ def fight_state():
             player_death()
             break
         if enmy.hp == 0:
+            fighting == False
             print("The skeleton collapses.\nIts bones and sword clatter to the ground in a cacophany which is quickly stifled by the quiet stone walls.")
             print("[add to score]")
-            break
-        break    
+            break    
 
 #Deciding whether to spawn enemy
 def check_fight():
@@ -192,10 +220,15 @@ def room_movement():
         describe_room()
         continue_confirm()
         check_fight()
-        
+        invst_input()
+        print("Exit room?")
+        choice = yes_no()
+        if choice == True:
+            current_room = roomdata[current_room]["exit"]["1"]
+
 #Prints current_room's entry text. Allows the player to view the room description again if they forgot what was mentioned
 def describe_room():
-    print("hello" + roomdata[current_room]["description"]["entry"])
+    print(roomdata[current_room]["description"]["entry"])
 
 #Printing map with the player displayed in the room they're currently in
 def map_position():
@@ -279,6 +312,13 @@ def invst_input():
 #Each room can only have one successful focus, so this is effectively determining the event by the room the player is in.
 def invst_event(focus):
     
+    #Vine room event:
+    if focus == "torch":
+        if item_in_inventory("itm_trch") == False:
+            item_add("itm_r_bk")
+        else:
+            print("Nothing of interest.")
+        
     #Library event:
     if focus == "bookshelf":
         #If player hasn't done anything:

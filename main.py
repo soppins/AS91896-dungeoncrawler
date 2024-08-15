@@ -20,4 +20,4 @@ fun.clear_terminal()
 # fun.clear_terminal()
 # fun.invst_input()
 
-fun.room_movement()
+fun.main_menu()
