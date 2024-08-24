@@ -60,6 +60,4 @@ class enemy():
         target.hp -= self.damage
         if target.hp < 0:
             target.hp = 0
-        print("The skeleton swings at you with its rusty blade, leaving bleeding gashs across your body.")
-        
-        
+        print("The skeleton swings at you with its rusty blade, leaving bleeding gashes across your body.")

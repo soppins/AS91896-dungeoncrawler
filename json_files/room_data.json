@@ -94,8 +94,8 @@
         "map_number": 5,
         "fight_prob": 60,
         "description": {
-            "entry": "",
-            "exit": ""
+            "entry": "dusty bookshelves. exit doesn't seem to budge.",
+            "exit": "you push the now-unlocked door open and step through into..."
         },
         "investigation": {
             "answers": {

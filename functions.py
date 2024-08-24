@@ -20,17 +20,31 @@ enmy = classes.enemy()
 current_room = "vine_room"
 
 
+
 #PROGRAM FUNCTIONS
+#Opening text
+def open_text():
+    clear_terminal()
+    print("You are a thief.\nYou must utilise your skills in investigation and combat to obtain the golden Fish Idol hidden deep within...")
+    time.sleep(4)
+
 #Main menu
 def main_menu():
-    clear_terminal()
-    print("""WELCOME TO DUNJING!\n>start\n>config\n>close""")
-    choice = input("")
+    print("""
+
+░       ░░░░      ░░░  ░░░░░░░░  ░░░░  ░░░      ░░░        ░░        ░░       ░░
+▒  ▒▒▒▒  ▒▒  ▒▒▒▒  ▒▒  ▒▒▒▒▒▒▒▒  ▒  ▒  ▒▒  ▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒
+▓       ▓▓▓  ▓▓▓▓  ▓▓  ▓▓▓▓▓▓▓▓        ▓▓  ▓▓▓▓  ▓▓▓▓▓  ▓▓▓▓▓      ▓▓▓▓       ▓▓
+█  ████  ██        ██  ████████   ██   ██        █████  █████  ████████  ███  ██
+█       ███  ████  ██        ██  ████  ██  ████  █████  █████        ██  ████  █
+\n>start\n>config\n>close\n\n[Enter an option from this list]\n """)
+    choice = input("").lower()
     if choice == "start":
         game_start()
     elif choice == "config":
         print("no settings :-)\n")
         time.sleep(.5)
+        clear_terminal()
         main_menu()
     elif choice == "close":
         print("Are you sure you want to close the program?")
@@ -40,17 +54,27 @@ def main_menu():
         else:
             main_menu()
     else:
+        print("Invalid input.")
+        time.sleep(.5)
+        clear_terminal()
         main_menu()
-        
+
+
+    print("The air around you grows colder and damper as you descend the stone spiral staircase into Balwater...")
+    time.sleep(.5)
+    print("Finally, the staircase ends and you are facing an old wooden door that seems to be rotting on its hinges.\nYou push the door open.") 
+
 
 #Starts the game (accessible on death or when investigating a room.)
 def game_start():
-    print("game startng")
+    clear_terminal()
+    plr.name
     plr.name = naming_player()
-    room_movement()
+    room_movement("vine_room")
 
 #Closes the game (accessible on death or when investigating a room.)
 def game_end():
+    clear_terminal()
     print("bye")
     
 #Presents a y/n option that can be recalled if the user inputs the wrong thing
@@ -72,14 +96,13 @@ def naming_player():
     if choice == True:
         print(username)
     elif choice == False:
-        choice = yes_no()
-        
-    else:
         naming_player()
+    else:
+        choice = yes_no()
 
 #Displaying healthbar of chosen character
 def healthbar(object):
-    print(f"{object.name} HP: {object.hp}/100")
+    print(f"\n{object.name} HP: {object.hp}/100\n")
     
 #Death
 def player_death():
@@ -157,9 +180,15 @@ def inventory():
         print(itemdata[item_choice]["use_text"])
 
 #When player uses an item, this function decides what occurs based on the current_room's data and the item's data.
-#Each room can only have one successful focus, so this is effectively determining the event by the room the player is in.
-def invst_event():
-    
+#Each room can only have one successful item, so this is effectively determining the event by the room the player is in.
+def item_event(item):
+    global current_room
+    if item in roomdata[current_room]["items"]["use"]:
+        if item == "itm_trch":
+            unlock_exit()
+            print(itemdata[item]["use_text"])
+    else:
+        print("Unable to use item.")
     
 
 
@@ -169,22 +198,23 @@ def fight_state():
     fighting = True
     
     spawn_enemy()
-    healthbar(enmy)
-    healthbar(plr)
+    
     
     #Player remains in fighting state until either enemy or player dies
     while fighting == True:
         clear_terminal()
-        input("type 'hit' to hit\n")
+        healthbar(enmy)
+        healthbar(plr)
         
         enmy.attack(plr)
-        print(enmy.hp)
-        print(plr.hp)
+        healthbar(enmy)
+        healthbar(plr)
         continue_confirm()
         
+        input("type 'hit' to hit\n")
         plr.attack(enmy)
-        print(enmy.hp)
-        print(plr.hp)
+        healthbar(enmy)
+        healthbar(plr)
         continue_confirm()
         
         if plr.hp == 0:
@@ -194,11 +224,12 @@ def fight_state():
         if enmy.hp == 0:
             fighting == False
             print("The skeleton collapses.\nIts bones and sword clatter to the ground in a cacophany which is quickly stifled by the quiet stone walls.")
-            print("[add to score]")
+            add_score(500)
             break    
 
 #Deciding whether to spawn enemy
 def check_fight():
+    global current_room
     if random.randint(0, 100) <= roomdata[current_room]["fight_prob"]:
         fight_state()
     else:
@@ -207,24 +238,31 @@ def check_fight():
 #Spawn enemy
 def spawn_enemy():
     enmy.spawn()
-    print("Suddenly, a section of the floor cracks.\nFlagstones are upturned as a hand bursts out of the ground.\nFrom the dirt rises a bony figure that pulls a corroded sword with it.\nClumps of clay and stone fall away from the skeleton's bones as it steadies itself on its feet and points the sword directly at you.")
+    print("Suddenly, a section of the floor cracks.\nFlagstones are upturned as a hand bursts out of the ground.\nFrom earth rises a bony figure that pulls a corroded sword with it.\nClumps of clay and stone fall away from the skeleton's bones as it steadies itself on its feet and points the sword directly at you.")
     continue_confirm()
     print("You unsheathe your own blade.")
 
 
 #ROOM FUNCTIONS
 #The function that allows the player to move between rooms
-def room_movement():
-    current_room = "vine_room"
+def room_movement(room):
+    global current_room
+    
+    #Allowing this function to modify the current_room variable for other functions
+    current_room = room
     while current_room != "end_room":
+        clear_terminal()
+        print(map_position())
+        time.sleep(1)
         describe_room()
         continue_confirm()
         check_fight()
         invst_input()
         print("Exit room?")
+        print("[exit: {}]".format(roomdata[current_room]["exit"]["1"]))
         choice = yes_no()
         if choice == True:
-            current_room = roomdata[current_room]["exit"]["1"]
+            room_movement(roomdata[current_room]["exit"]["1"])
 
 #Prints current_room's entry text. Allows the player to view the room description again if they forgot what was mentioned
 def describe_room():
@@ -232,7 +270,7 @@ def describe_room():
 
 #Printing map with the player displayed in the room they're currently in
 def map_position():
-    s = """PLACEHOLDER MAP-THIS WAS A TEST OF MAKING AN ASCII ART MAP, BUT DOES NOT REPRESENT THE FINAL LAYOUT OF THE DUNGEON
+    s = """PLACEHOLDER MAP-THIS IS A TEST OF MAKING AN ASCII ART MAP, AND DOES NOT REPRESENT THE FINAL LAYOUT OF THE DUNGEON
 ────────┐                                                                             
         └┐                                                                            
 ──────┐  └┐                                                                           
@@ -252,7 +290,7 @@ def map_position():
                                           ┌┘~ ~     ~ └┐                              
                                           │ ~ ~     ~  │                              
                                           │~~~~~~~~~~~~│                              
-                                          └────────────┘                              """
+                                          └────────────┘\n"""
     map_num = roomdata[current_room]["map_number"]
     sub = "."
     repl = "@"
@@ -277,7 +315,9 @@ def unlock_exit():
 
 #SCORING FUNCTIONS
 #Adds to the player's score depending on what the player is getting score from
-
+def add_score(amount = int):
+    plr.score += amount
+    print(f"{amount} andded to score.\nCurrent score: {plr.score}")
 
 
 #INVESTIGATION FUNCTIONS
@@ -290,7 +330,8 @@ def invst_selection(room, investigating):
 
 #Function will run a specific investigation on an item if the player is in the right room
 def invst_input():
-    investigating = input("What do you investigate?\n[Enter 'books' or 'bookshelf' to initiate test, enter 'done' to stop investigating.]\n").lower()
+    global current_room
+    investigating = input("What do you investigate?\n[Enter an object to focus on, or type 'done' stop investigating.]\n").lower()
     
     if investigating == "done":
         return
@@ -311,11 +352,12 @@ def invst_input():
 #When player successfully investigates something, this function decides what occurs based on the focus that was successful.
 #Each room can only have one successful focus, so this is effectively determining the event by the room the player is in.
 def invst_event(focus):
+    global current_room
     
     #Vine room event:
     if focus == "torch":
         if item_in_inventory("itm_trch") == False:
-            item_add("itm_r_bk")
+            item_add("itm_trch")
         else:
             print("Nothing of interest.")
         
@@ -331,13 +373,14 @@ def invst_event(focus):
                     print("Invalid input.")
                 
             if book_choice == 1:
-                unlock_exit()
-                print("As you pull the book out, your hear a mechanism grinding away behind it.\nThe book stops moving about halfway off the bookshelf, and a metallic 'thunk' resonates throughout the quiet aisles.\nThe exit is now unlocked.")
-                return "run"
-                
-            if book_choice == 2:
                 print("You pull the first book out of the shelf. You blow the dust off the cover.")
                 item_add("itm_r_bk")
+                return "run"
+                
+                
+            if book_choice == 2:
+                unlock_exit()
+                print("As you pull the book out, your hear a mechanism grinding away behind it.\nThe book stops moving about halfway off the bookshelf, and a metallic 'thunk' resonates throughout the quiet aisles.\nThe exit is now unlocked.")
                 return "run"
             else:
                 return "run"
