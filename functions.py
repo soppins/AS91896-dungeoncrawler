@@ -300,12 +300,18 @@ def room_menu():
                     print("[1: {}] [2:{}]".format(exit1, exit2))
                     choice = input("1 or 2\n")
                     if choice == "1":
+                        print(roomdata[current_room]["description"]["exit"])
+                        continue_confirm()
                         room_movement(exit1)
                     elif choice == "2":
+                        print(roomdata[current_room]["description"]["exit"])
+                        continue_confirm()
                         room_movement(exit2)
                     else:
                         room_menu()
                 else:
+                    print(roomdata[current_room]["description"]["exit"])
+                    continue_confirm()
                     room_movement(roomdata[current_room]["exit"]["1"])
             else:
                 room_menu()
