@@ -3,8 +3,8 @@
         "map_number": 1,
         "fight_prob": 0,
         "description": {
-            "entry": "dead vines covering next door, core vines too thick to cut, but dry",
-            "exit": "you step through the remaining embers into the next room"
+            "entry": "The room is dimly lit by a lone torch resting in a sconce on the wall to your left.\nDirectly ahead of you, a mass of tightly interlocked dead vines covers the entire wall, obstructing the next door.\nThe vines are too thick to cut, even with your sword, but they are very dry.",
+            "exit": "You tread carefully through the remaining embers, open the door, and step into the next room."
         },
         "investigation": {
             "answers": {
@@ -19,33 +19,11 @@
         },
         "locked": "True",
         "exit": {
-            "1": "alchemy_room"
+            "1": "chest_room"
         }
     },
-    "alchemy_room": {
-        "map_number": 2,
-        "fight_prob": 50,
-        "description": {
-            "entry": "",
-            "exit": ""
-        },
-        "investigation": {
-            "answers": {
-                "": 0
-            },
-            "function": ""
-        },
-        "items": {
-            "obtain": "itm_btl",
-            "use": ""
-        },
-        "locked": "False",
-        "exit": {
-            "1":"chest_room"
-        } 
-    },
     "chest_room": {
-        "map_number": 3,
+        "map_number": 2,
         "fight_prob": 100,
         "description": {
             "entry": "",
@@ -64,8 +42,30 @@
         },
         "locked": "False",
         "exit": {
-            "1": "well_room",
+            "1": "alchemy_room",
             "2": "library_room"
+        } 
+    },
+    "alchemy_room": {
+        "map_number": 3,
+        "fight_prob": 50,
+        "description": {
+            "entry": "",
+            "exit": ""
+        },
+        "investigation": {
+            "answers": {
+                "": 0
+            },
+            "function": ""
+        },
+        "items": {
+            "obtain": "itm_btl",
+            "use": ""
+        },
+        "locked": "False",
+        "exit": {
+            "1":"chest_room"
         } 
     },
     "well_room": {
@@ -160,7 +160,7 @@
         } 
     },
     "reservoir_pool_room": {
-        "map_number": 8,
+        "map_number": 11,
         "fight_prob": 0,
         "description": {
             "entry": "",
@@ -184,7 +184,7 @@
         } 
     },
     "clam_room": {
-        "map_number": 9,
+        "map_number": 8,
         "fight_prob": 45,
         "description": {
             "entry": "",
@@ -206,7 +206,7 @@
         } 
     },
     "spikes_room": {
-        "map_number": 10,
+        "map_number": 9,
         "fight_prob": 20,
         "description": {
             "entry": "",
@@ -228,7 +228,7 @@
         } 
     },
     "idol_room": {
-        "map_number": 11,
+        "map_number": 10,
         "fight_prob": 0,
         "description": {
             "entry": "",

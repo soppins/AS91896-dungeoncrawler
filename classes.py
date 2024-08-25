@@ -34,7 +34,7 @@ class player():
         target.hp -= self.damage
         if target.hp < 0:
             target.hp = 0
-        print("Your sword swings and sticks into the side of the skeleton. A raspy shriek escapes its skull as you rip the sword back out, taking a rib with it.")
+        print("Your sword swings and sticks into the side of the skeleton. A raspy shriek escapes its skull as you rip the sword back out, taking a rib with it.\n")
 
 class enemy():
     #Enemies' starting health will be determined by the spawn function
@@ -60,4 +60,4 @@ class enemy():
         target.hp -= self.damage
         if target.hp < 0:
             target.hp = 0
-        print("The skeleton swings at you with its rusty blade, leaving bleeding gashes across your body.")
+        print("The skeleton swings at you with its rusty blade, leaving bleeding gashes across your body.\n")

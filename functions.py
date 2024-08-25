@@ -25,8 +25,10 @@ current_room = "vine_room"
 #Opening text
 def open_text():
     clear_terminal()
-    print("You are a thief.\nYou must utilise your skills in investigation and combat to obtain the golden Fish Idol hidden deep within...")
-    time.sleep(4)
+    print("You are a thief.")
+    time.sleep(1)
+    print("You must utilise your skills in investigation and combat to obtain the golden Fish Idol hidden deep within...")
+    time.sleep(2)
 
 #Main menu
 def main_menu():
@@ -60,22 +62,29 @@ def main_menu():
         main_menu()
 
 
-    print("The air around you grows colder and damper as you descend the stone spiral staircase into Balwater...")
-    time.sleep(.5)
-    print("Finally, the staircase ends and you are facing an old wooden door that seems to be rotting on its hinges.\nYou push the door open.") 
+     
 
 
 #Starts the game (accessible on death or when investigating a room.)
 def game_start():
     clear_terminal()
-    plr.name
     plr.name = naming_player()
+    print("Very well.")
+    time.sleep(.5)
+    clear_terminal()
+    
+    print("The air around you grows cold and damp as you descend the stone spiral staircase into Balwater...\n")
+    continue_confirm()
+    print("Your feet ache and your eyes are straining to see in the dark as you come to to the end of the staircase.\nAn old wooden door that seems to be rotting on its hinges stands in your way.\nYou push the door open and step into the room beyond.\n")
+    continue_confirm()
+    
     room_movement("vine_room")
 
 #Closes the game (accessible on death or when investigating a room.)
 def game_end():
     clear_terminal()
     print("bye")
+    quit()
     
 #Presents a y/n option that can be recalled if the user inputs the wrong thing
 def yes_no():
@@ -85,7 +94,7 @@ def yes_no():
     elif choice == "n":
         return False
     else:
-        yes_no()
+        return "else"
 
 #PLAYER
 #Naming player object
@@ -94,15 +103,15 @@ def naming_player():
     print(f"You have chosen the name {username}. Proceed?")
     choice = yes_no()
     if choice == True:
-        print(username)
+        return username
     elif choice == False:
         naming_player()
     else:
-        choice = yes_no()
+        naming_player()
 
 #Displaying healthbar of chosen character
 def healthbar(object):
-    print(f"\n{object.name} HP: {object.hp}/100\n")
+    print(f"{object.name} HP: {object.hp}/100")
     
 #Death
 def player_death():
@@ -128,17 +137,19 @@ def continue_confirm() -> None:
 #ITEM FUNCTIONS
 #Adding item to inventory
 def item_add(item):
-    plr.inventory.append(item)
-    if type(itemdata[item]["uses"]) in itemdata[item]:
+    if item not in plr.inventory:
+        plr.inventory.append(item)
+    if type(itemdata[item]["uses"]) == int:
         itemdata[item]["uses"] += 1
     print("'" + itemdata[item]["name"] + "' added to inventory.")
     print("(Description: " + itemdata[item]["description"]["summary"] + ")")
 
 #Removing item from inventory
 def item_rmv(item):
-    if type(itemdata[item]["uses"]) in itemdata[item]:
+    if type(itemdata[item]["uses"]) == int:
         itemdata[item]["uses"] -= 1
-    plr.inventory.remove(item)
+    else:
+        plr.inventory.remove(item)
     print("'" + itemdata[item]["name"] + "' lost with use.")
     
 
@@ -148,7 +159,7 @@ def item_in_inventory(item):
 
 #Lowering an item's number of uses with use of the item (no need to check whether an item has uses remaining or not, as the user won't be able to see items with 0 uses in inventory)
 def item_used(item):
-    itemdata[item]["uses"]["summary"] -= 1
+    itemdata[item]["uses"] -= 1
         
     
 #Displaying items in player inventory
@@ -158,37 +169,51 @@ def inventory_list():
         #Defining official name and number of uses of current item
         name = itemdata[item]["name"]
         uses = itemdata[item]["uses"]
+        
+        #Number of item in player inventory
+        number = plr.inventory.index(item)
+        
         #Don't print the item if it has no uses left
         if uses == 0:
             pass
         #Print the item with uses if it has uses
         elif uses != "None":
             print("{}> {} ({})".format(number, name, uses))
-            number += 1
         #If no uses, just print the item name
         else:
-            print("> {}".format(name))
+            print("{}> {}".format(number, name))
             
 #Inventory system
 def inventory():
+    clear_terminal()
+    print("Inventory:\n")
     inventory_list()
-    item_choice = input("What would you like to inspect?")
-    print(itemdata[item_choice]["description"]["detailed"])
-    print("Would you like to use this item?")
-    usechoice = yes_no()
-    if usechoice == True:
-        print(itemdata[item_choice]["use_text"])
+    item_choice = input("[Enter the number of an item to inspect, or enter 'done' to exit]\n")
+    if item_choice == "done":
+        room_menu()
+    else:
+        item_choice = int(item_choice)
+        print(itemdata[plr.inventory[item_choice]]["description"]["detailed"])
+        print("Would you like to use this item?")
+        usechoice = yes_no()
+        if usechoice == True:
+            item_event(plr.inventory[item_choice])
+        else:
+            inventory()
 
 #When player uses an item, this function decides what occurs based on the current_room's data and the item's data.
 #Each room can only have one successful item, so this is effectively determining the event by the room the player is in.
 def item_event(item):
     global current_room
-    if item in roomdata[current_room]["items"]["use"]:
+    
+    if item == roomdata[current_room]["items"]["use"]:
         if item == "itm_trch":
             unlock_exit()
             print(itemdata[item]["use_text"])
+            continue_confirm()
     else:
         print("Unable to use item.")
+        continue_confirm()
     
 
 
@@ -198,7 +223,6 @@ def fight_state():
     fighting = True
     
     spawn_enemy()
-    
     
     #Player remains in fighting state until either enemy or player dies
     while fighting == True:
@@ -211,7 +235,6 @@ def fight_state():
         healthbar(plr)
         continue_confirm()
         
-        input("type 'hit' to hit\n")
         plr.attack(enmy)
         healthbar(enmy)
         healthbar(plr)
@@ -219,12 +242,14 @@ def fight_state():
         
         if plr.hp == 0:
             print("Your wounds become too much for you to handle. You fall to the ground in pain and fatigue, never to rise again.")
+            continue_confirm()
             player_death()
             break
         if enmy.hp == 0:
             fighting == False
             print("The skeleton collapses.\nIts bones and sword clatter to the ground in a cacophany which is quickly stifled by the quiet stone walls.")
             add_score(500)
+            continue_confirm()
             break    
 
 #Deciding whether to spawn enemy
@@ -238,12 +263,57 @@ def check_fight():
 #Spawn enemy
 def spawn_enemy():
     enmy.spawn()
-    print("Suddenly, a section of the floor cracks.\nFlagstones are upturned as a hand bursts out of the ground.\nFrom earth rises a bony figure that pulls a corroded sword with it.\nClumps of clay and stone fall away from the skeleton's bones as it steadies itself on its feet and points the sword directly at you.")
+    print("Suddenly, a section of the floor cracks.\nFlagstones are upturned as a hand bursts out of the ground.\nFrom the earth rises a bony figure that pulls a corroded sword with it.\nClumps of clay and stone fall away from the skeleton's bones as it steadies itself on its feet and points the sword directly at you.")
     continue_confirm()
     print("You unsheathe your own blade.")
 
 
 #ROOM FUNCTIONS
+#Menu of actions that can be taken when idle in a room
+def room_menu():
+    clear_terminal()
+    print(map_position())
+    describe_room()
+    print("\n>investigate\n>items\n>progress\n>exit\n\n")
+    choice = input("[Enter an option from this list]\n")
+    if choice == "investigate":
+        invst_input()
+        room_menu()
+    elif choice == "items":
+        inventory()
+        room_menu()
+    elif choice == "progress":
+        if roomdata[current_room]["locked"] == True:
+            print("Exit is obstructed.")
+            continue_confirm()
+            room_menu()
+        else:
+            print("Progress to the next room?")
+            choice = yes_no()
+            
+            if choice == True:
+                if "2" in roomdata[current_room]["exit"]:
+                    
+                    exit1 = roomdata[current_room]["exit"]["1"]
+                    exit2 = roomdata[current_room]["exit"]["2"]
+                                        
+                    print("[1: {}] [2:{}]".format(exit1, exit2))
+                    choice = input("1 or 2\n")
+                    if choice == "1":
+                        room_movement(exit1)
+                    elif choice == "2":
+                        room_movement(exit2)
+                    else:
+                        room_menu()
+                else:
+                    room_movement(roomdata[current_room]["exit"]["1"])
+            else:
+                room_menu()
+    else:
+        print("Invalid input.")
+        time.sleep(.5)
+        room_menu()
+        
 #The function that allows the player to move between rooms
 def room_movement(room):
     global current_room
@@ -257,12 +327,16 @@ def room_movement(room):
         describe_room()
         continue_confirm()
         check_fight()
-        invst_input()
-        print("Exit room?")
-        print("[exit: {}]".format(roomdata[current_room]["exit"]["1"]))
-        choice = yes_no()
-        if choice == True:
-            room_movement(roomdata[current_room]["exit"]["1"])
+        room_menu()
+    print("you pick up the fish idol and waltz out of there!")
+    add_score(9999999)
+    print("you win! play again?")
+    choice = yes_no()
+    if choice == True:
+        game_start()
+    else:
+        game_end()
+        
 
 #Prints current_room's entry text. Allows the player to view the room description again if they forgot what was mentioned
 def describe_room():
@@ -270,27 +344,28 @@ def describe_room():
 
 #Printing map with the player displayed in the room they're currently in
 def map_position():
-    s = """PLACEHOLDER MAP-THIS IS A TEST OF MAKING AN ASCII ART MAP, AND DOES NOT REPRESENT THE FINAL LAYOUT OF THE DUNGEON
-────────┐                                                                             
-        └┐                                                                            
-──────┐  └┐                                                                           
-      └┐  └┐                                                                          
-       └┐  └┐                                ┌──────┐                                 
-        └┐  └┐                             ┌╥┘ ╤══╤ └┐    ┌──┐                        
-         └┐  └──╥─────╥─────╥──────────────┘║ ╚╪═╦╪╝ │    │░•│                        
-          └┐ .  ╢  .  ╢  .  ╢       .       ╢ ┌┴──┴┐ │  ┌─┘░ └─┐                      
-           └────╨─────╨─────╨───────────────╨─┴────┴─┘  │░░  •░│                      
-             │┼│                            ┌────────┐  │░•  ░░│                      
-             │┼│ ┌▼▼▼▼┐ ┌──────┐ ┌──┐ ┌──┐ ┌┘ ~     ~└┐ │░  • ░│                      
-             │┼└╥┘░  ░└╥┘░     └╥┘  └╥┘  └╥┘  ~     ~ └─┘     ░│                      
-             │┼ ╢ ░ .  ╢   .  ░░╢ .  ╢  . ╢   ~     ~      ┬┬  │                      
-             └┴─╨──────╨─┐▲▲▲▲┌──────────────────────────╥─┴┴─╥┘                      
-                                             ┌──────┐                                 
-                                           ┌─┘~     └─┐                               
-                                          ┌┘~ ~     ~ └┐                              
-                                          │ ~ ~     ~  │                              
-                                          │~~~~~~~~~~~~│                              
-                                          └────────────┘\n"""
+    s = """  └┐                      ┌────────┐                              
+   └┐                    ┌┘        └┐                  ┌─┐        
+└┐  └┐                   │    ╤══╤  │                  │█│        
+ └┐  └────╥─────╥─────╥──┘   ╚╪═╦╪╝ │                  │▓│        
+  └┐  .   ╢  .  ╢  .  ╢   .  ┌┴──┴┐ │                 ┌┘▓└┐       
+   └──────╨─────╨─────╨──────┴────┴─┘                 │ ▒•│       
+           │┼│             ┌────────┐                ┌┘ ▒ └┐      
+           │┼│            ┌┘~     ~ └┐               │• ▒  │      
+           │┼│            │ ~     ~ ~│               │  ░  │      
+           │┼│┌───┐       │ ~     ~ ~│               │  ░ •│      
+           │┼││╒╤╕│       │ ~     ~ ~│       ┌▼▼▼┐   │ •   │      
+           │┼└┘╞╪╡└╥─────╥┘ ~     ~ ~└╥─────╥┘   └╥──┘     │      
+           │┼ .╞╪╡ ╢  .  ╢  ~  .  ~ ~ ╢  .  ╢  .  ╢  .  ╥  │      
+           └┴──────╨─────╨────────────╨─────╨─────╨─────╨──┘      
+                            ┌┐ ┌┐ ┌┐   │┼│                        
+                           ┌┘│ ││ │└┐  │┼│                        
+                          ┌┘~│ ││ │ └┐ │┼│                        
+                          │ ~│ ││ │ ~│ │┼│                        
+                          │ ~│ ││ │ ~│─┘┼│                        
+                          │~~~~~~~~.~│──┴┘                        
+                          │░░│░││░│░░│                            
+                          └──────────┘                            \n"""
     map_num = roomdata[current_room]["map_number"]
     sub = "."
     repl = "@"
@@ -317,7 +392,7 @@ def unlock_exit():
 #Adds to the player's score depending on what the player is getting score from
 def add_score(amount = int):
     plr.score += amount
-    print(f"{amount} andded to score.\nCurrent score: {plr.score}")
+    print(f"{amount} added to score.\nCurrent score: {plr.score}")
 
 
 #INVESTIGATION FUNCTIONS
@@ -347,6 +422,7 @@ def invst_input():
             
     else:
         print("You find nothing.")
+        time.sleep(.5)
         invst_input()
         
 #When player successfully investigates something, this function decides what occurs based on the focus that was successful.
@@ -357,7 +433,9 @@ def invst_event(focus):
     #Vine room event:
     if focus == "torch":
         if item_in_inventory("itm_trch") == False:
+            print("You walk up to the torch and pull it out of its sconce.")
             item_add("itm_trch")
+            continue_confirm()
         else:
             print("Nothing of interest.")
         
@@ -371,16 +449,19 @@ def invst_event(focus):
                     break
                 except ValueError:
                     print("Invalid input.")
+                    continue_confirm()
                 
             if book_choice == 1:
                 print("You pull the first book out of the shelf. You blow the dust off the cover.")
                 item_add("itm_r_bk")
+                continue_confirm()
                 return "run"
                 
                 
             if book_choice == 2:
                 unlock_exit()
                 print("As you pull the book out, your hear a mechanism grinding away behind it.\nThe book stops moving about halfway off the bookshelf, and a metallic 'thunk' resonates throughout the quiet aisles.\nThe exit is now unlocked.")
+                continue_confirm()
                 return "run"
             else:
                 return "run"
@@ -391,6 +472,7 @@ def invst_event(focus):
             if book_choice == "y":
                 print("You pull the first book out of the shelf. You blow the dust off the cover.")
                 item_add("itm_r_bk")
+                continue_confirm()
                 return "run"
             else:
                 return "run"
@@ -401,11 +483,13 @@ def invst_event(focus):
             if book_choice == "y":
                 unlock_exit()
                 print("As you pull the book out, your hear a mechanism grinding away behind it.\nThe book stops moving about halfway off the bookshelf, and a metallic 'thunk' resonates throughout the quiet aisles.\nThe exit is now unlocked.")
+                continue_confirm()
                 return "run"
             else:
                 return "run"
         else:
             print("No other books on the bookshelf seem important.")
+            continue_confirm()
                 
     if focus == "well":
         print("unfinished")
