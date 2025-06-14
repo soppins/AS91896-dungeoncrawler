@@ -110,7 +110,7 @@
             "obtain": "itm_r_bk",
             "use": ""
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"riddle_room"
         } 
@@ -132,7 +132,7 @@
             "obtain": "",
             "use": "itm_r_bk"
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"reservoir_bridge_room"
         } 
@@ -178,7 +178,7 @@
             "obtain": "itm_prl",
             "use": "itm_btl"
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"clam_room"
         } 
@@ -200,7 +200,7 @@
             "obtain": "",
             "use": "itm_prl"
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"spikes_room"
         } 
@@ -222,7 +222,7 @@
             "obtain": "",
             "use": "itm_t_bk"
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"idol_room"
         } 
@@ -244,7 +244,7 @@
             "obtain": "itm_idol",
             "use": ""
         },
-        "locked": "True",
+        "locked": "False",
         "exit": {
             "1":"end_room"
         } 
